@@ -1,5 +1,8 @@
 import React from 'react'
 import "./LoginPage.css"
+import Button from '@material-ui/core/Button';
+import TextField from '@material-ui/core/TextField';
+
 
 function LoginPage() {
     return (
@@ -7,15 +10,18 @@ function LoginPage() {
             <h1>Dobrodošli na stranicu za predstavljanje zdravstvenih radova</h1>
             <h2>Prijavite se upisom svojih podataka</h2>
             <form className="login_form">
-                <input placeholder="Ime" type="text"/>
-                <input placeholder="Prezime" type="text"/>
-                <input placeholder="Naziv institucije ili poduzeća" type="text"/>
-                <input placeholder="Adresa" type="text"/>
-                <input placeholder="e-mail" type="text"/>
-                <input placeholder="Autori rada" type="text"/>
-                <input placeholder="Osoba za kontakt" type="text"/>
-                <input placeholder="Sekcija u kojoj želite sudjelovati" type="text"/>
+                <TextField label="Ime" />
+                <TextField label="Prezime" />
+                <TextField label="Naziv institucije" />
+                <TextField label="Adresa" />
+                <TextField label="E-mail" />
+                <TextField label="Autori rada" />
+                <TextField label="Osoba za kontakt" />
+                <TextField label="Sekcija u kojoj želite biti" />
             </form>
+            <Button variant="contained" color="primary">
+                Registriraj me!
+            </Button>
         </div>
     )
 }

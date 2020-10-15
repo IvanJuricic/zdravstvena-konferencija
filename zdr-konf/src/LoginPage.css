@@ -3,7 +3,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 90vh;
+    max-height: 90vh;
 }
 
 .login_form {
@@ -15,6 +15,7 @@
 .login_form > input {
     padding: 10px;
     margin: 5px;
-    height: 30px;
-    width: 250px;
+    max-height: 30px;
+    max-width: 250px;
+    flex-shrink: inherit;
 }
