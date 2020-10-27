@@ -1,12 +1,9 @@
 import React from "react";
 import "./App.css";
+import Sidebar from "./components/Sidebar";
 
 function App() {
-  return (
-    <div className="app">
-      <h1>Lets build a discorde clone</h1>
-    </div>
-  );
+  return <div className="app"></div>;
 }
 
 export default App;
