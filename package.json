@@ -7,7 +7,8 @@
     "start": "node server",
     "server": "nodemon server",
     "client": "npm start --prefix client",
-    "dev": "concurrently \"npm run server\" \"npm run client\""
+    "devv": "concurrently \"npm run server\" \"npm run client\"",
+    "dev": "env-cmd -f ./config/dev.env nodemon server"
   },
   "keywords": [],
   "author": "",
@@ -26,6 +27,7 @@
   },
   "devDependencies": {
     "concurrently": "^5.3.0",
+    "env-cmd": "^10.1.0",
     "nodemon": "^2.0.6"
   }
 }

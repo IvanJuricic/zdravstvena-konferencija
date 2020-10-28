@@ -27,7 +27,7 @@ router.get("/", auth, async (req, res) => {
 // @access  Public
 
 router.post(
-  "/",
+  "/login",
   [
     check("email", "Please include a valid email").isEmail(),
     check("password", "Password is required").exists(),
@@ -62,7 +62,7 @@ router.post(
 
       jwt.sign(
         payload,
-        config.get("jwtSecret"),
+        process.env.JWT_SECRET,
         { expiresIn: 360000 },
         (err, token) => {
           if (err) throw err;
@@ -76,13 +76,22 @@ router.post(
   }
 );
 
+// @route   POST api/auth
+// @desc    Log in, authenticate user & get token
+// @access  Private
+router.post("/logout", auth, async (req, res) => {
+  try {
+    req.user.token;
+  } catch (err) {}
+});
+
 // @route   GET api/auth/activate
 // @desc    Activate user account
 // @access  Private
 
 router.put("/activate/:token", async (req, res) => {
   try {
-    const data = jwt.verify(req.params.token, config.get("jwtSecret"));
+    const data = jwt.verify(req.params.token, process.env.JWT_SECRET);
     await User.findByIdAndUpdate(
       { _id: data._id },
       { isAuthorized: true },

@@ -1,15 +1,13 @@
 const sgMail = require("@sendgrid/mail");
 const config = require("config");
 const jwt = require("jsonwebtoken");
-const sendgridAPIKey =
-  "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";
 
-sgMail.setApiKey(sendgridAPIKey);
+sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
 const sendWelcomeEmail = async (user) => {
   const token = await jwt.sign(
     { _id: user._id.toString() },
-    config.get("jwtSecret")
+    process.env.JWT_SECRET
   );
   const url = `http://localhost:5000/api/auth/${token}`;
   sgMail
