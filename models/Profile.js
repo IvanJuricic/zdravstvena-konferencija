@@ -4,9 +4,16 @@ const profileSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "user",
   },
-  paper: {
+  bio: {
     type: String,
   },
+  papers: [
+    {
+      name: {
+        type: String,
+      },
+    },
+  ],
   social: {
     youtube: {
       type: String,

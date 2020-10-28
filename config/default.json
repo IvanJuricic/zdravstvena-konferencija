@@ -1,4 +1,4 @@
 {
-    "mongoURI":"mongodb+srv://admin:Qx54VeK8gYOaStK0@cluster0.3nqf8.mongodb.net/konferencija?retryWrites=true&w=majority",
-    "jwtSecret":"mysecret"
+  "mongoURI": "mongodb+srv://admin:dIvI1JfdFNczg6XM@cluster0.9peib.mongodb.net/zdr-konf?retryWrites=true&w=majority",
+  "jwtSecret": "mysecret"
 }
