@@ -1,7 +1,11 @@
+const http = require("http");
 const express = require("express");
+const socketio = require("socket.io");
 const connectDB = require("./config/db");
 
 const app = express();
+const server = http.createServer(app);
+const io = socketio(server);
 
 // Connect Database
 connectDB();
@@ -19,4 +23,4 @@ const PORT = process.env.PORT;
 
 app.get("/", (req, res) => res.send("API Running"));
 
-app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
+server.listen(PORT, () => console.log(`Server started on port ${PORT}`));
