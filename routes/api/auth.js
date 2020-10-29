@@ -11,7 +11,6 @@ const { models } = require("mongoose");
 // @route   GET api/auth
 // @desc    Test route
 // @access  Public
-
 router.get("/", auth, async (req, res) => {
   try {
     const user = await User.findById(req.user.id).select("-password");
@@ -22,10 +21,9 @@ router.get("/", auth, async (req, res) => {
   }
 });
 
-// @route   POST api/auth
+// @route   POST api/auth/login
 // @desc    Log in, authenticate user & get token
 // @access  Public
-
 router.post(
   "/login",
   [
@@ -54,21 +52,10 @@ router.post(
       }
 
       // Return jsonwebtoken (JWT)
-      const payload = {
-        user: {
-          id: user.id,
-        },
-      };
 
-      jwt.sign(
-        payload,
-        process.env.JWT_SECRET,
-        { expiresIn: 360000 },
-        (err, token) => {
-          if (err) throw err;
-          res.json({ token });
-        }
-      );
+      const token = await user.generateAuthToken();
+
+      res.json({ token });
     } catch (err) {
       console.error(err.message);
       res.status(500).send("Server error");
@@ -76,19 +63,17 @@ router.post(
   }
 );
 
-// @route   POST api/auth
-// @desc    Log in, authenticate user & get token
+// @route   POST api/auth/logout
+// @desc    Log out user
 // @access  Private
 router.post("/logout", auth, async (req, res) => {
   try {
-    req.user.token;
   } catch (err) {}
 });
 
 // @route   GET api/auth/activate
 // @desc    Activate user account
 // @access  Private
-
 router.put("/activate/:token", async (req, res) => {
   try {
     const data = jwt.verify(req.params.token, process.env.JWT_SECRET);

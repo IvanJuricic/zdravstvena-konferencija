@@ -17,8 +17,15 @@ const UserSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: "paper",
       },
+      name: {
+        type: String,
+        ref: "paper",
+      },
     },
   ],
+  emailToken: {
+    type: String,
+  },
   isAuthorized: {
     type: Boolean,
     default: false,
@@ -40,7 +47,10 @@ const UserSchema = new mongoose.Schema({
   },
   role: {
     type: String,
-    default: null,
+    default: "USER",
+  },
+  country: {
+    type: String,
   },
   date: {
     type: Date,
@@ -50,7 +60,10 @@ const UserSchema = new mongoose.Schema({
 
 UserSchema.methods.generateAuthToken = async function () {
   const user = this;
-  const token = jwt.sign({ _id: user._id.toString() }, process.env.JWT_SECRET);
+  const token = jwt.sign({ _id: user._id.toString() }, process.env.JWT_SECRET, {
+    expiresIn: 36000,
+  });
+
   return token;
 };
 
